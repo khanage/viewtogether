@@ -1,0 +1,24 @@
+<div .masthead>
+    <div .container>
+        <div .row>
+            <h1 .header>
+                View Together
+            <h2>
+                Social. Media.
+<div #application>
+<div .container>
+    <!-- Starting
+        ================================================== -->
+    <div .bs-docs-section>
+        <div .row>
+            <div .col-lg-12>
+                <div .page-header>
+                    <h1 #start>Comment on your favourite shows.
+
+                   <p>
+                        Setup a group to share your opinions on your shows on netflix, or to watch a series together.
+
+                    <ul .list-group>
+
+                        <li .list-group-item>
+                          Watch a show and leave comments

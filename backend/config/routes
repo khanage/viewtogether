@@ -1,0 +1,17 @@
+/static StaticR Static appStatic
+/auth   AuthR   Auth   getAuth
+
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+/ HomeR GET
+
+/v1/group GroupR GET POST
+/v1/group/#GroupDbId ExistingGroupR GET
+/v1/group/#GroupDbId/members/#UserDbId AssignUserGroupR PUT DELETE
+
+/v1/session SessionR GET POST
+/v1/session/#SessionDbId SpecificSessionR GET PUT
+
+/v1/session/#SessionDbId/comment CommentR GET POST
+/v1/session/#SessionDbId/comment/#CommentDbId ExistingCommentR GET PUT DELETE

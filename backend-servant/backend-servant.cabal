@@ -1,44 +1,62 @@
 name:                backend-servant
 version:             0.1.0.0
-synopsis:            Initial project template from stack
+synopsis:            View together is a web app to watch shows on netflix et al with friends
 description:         Please see README.md
-homepage:            https://github.com/githubuser/backend-servant#readme
+homepage:            https://github.com/khanage/backend-servant#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2016 Author name here
+author:              Khan Thompson
+maintainer:          khanage@gmail.com
+copyright:           2016 Khan Thompson
 category:            Web
 build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
+flag library-only
+  default: False
+  description: used with yesod devel to skip exe compilation
+
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
+  exposed-modules:     EntryPoint
+  other-modules:       ViewTogetherApp
+
                      , BaseImports
                      , Imports
+                     , Config
+
                      , DbModels
                      , Models
-                     , Config
+
+                     , Claims
+
                      , Handlers
+
                      , User
+                     , Session
+
   default-extensions:  OverloadedStrings
                      , DeriveFunctor
                      , ScopedTypeVariables
                      , GeneralizedNewtypeDeriving
+                     , TypeFamilies
                      , NoImplicitPrelude
+                     , RecordWildCards
                      , RankNTypes
                      , TemplateHaskell
                      , DeriveGeneric
+                     , FlexibleContexts
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , mtl
                      , http-types
+                     , servant
                      , servant-server
                      , servant-swagger
                      , swagger2
                      , text
+                     , jose-jwt
                      , bytestring
                      , lens
                      , time
@@ -53,11 +71,14 @@ library
                      , classy-prelude
                      , esqueleto
                      , resource-pool
+                     , directory
   default-language:    Haskell2010
 
 executable backend
   hs-source-dirs:      app
   main-is:             Main.hs
+  if flag(library-only)
+     buildable: False
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   default-extensions:  OverloadedStrings
                      , TemplateHaskell
@@ -67,10 +88,9 @@ executable backend
                      , monad-logger
                      , classy-prelude
                      , fast-logger
-                     , persistent-sqlite
   default-language:    Haskell2010
 
-test-suite backend-servant-test
+test-suite backend-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
@@ -81,4 +101,4 @@ test-suite backend-servant-test
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/backend-servant
+  location: https://github.com/khanage/backend-servant

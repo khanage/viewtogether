@@ -8,6 +8,7 @@ import           Config
 import           Database.Esqueleto
 import           Database.Persist.Sql
 import           Database.Persist.TH
+import           Models
 
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
 DbUser

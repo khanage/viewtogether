@@ -7,7 +7,7 @@ import Database.Esqueleto
 
 createNewUser
   :: UserEdit
-  -> App CreateUserResult
+  -> App CreateResult
 createNewUser UserEdit{..} = do
   alreadyExists <- fmap (not . null) $ runDb
     $ select

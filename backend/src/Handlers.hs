@@ -5,16 +5,19 @@ import           Database.Esqueleto
 import           DbModels
 import           Imports
 import           Servant
+import           Session
 import           User
-import Session
+import Jose.Jwt
 
 rootHandler :: App Text
 rootHandler = do
   $logInfo $ "Landed on the home page"
   pure "hello"
 
-getUsersHandler :: App [User]
-getUsersHandler = do
+getUsersHandler
+  :: GrantedClaims
+  -> App [User]
+getUsersHandler claims = do
   $logDebug $ "Loading users"
   dbUsers :: [Entity DbUser] <- runDb
     $ select
@@ -22,9 +25,10 @@ getUsersHandler = do
   pure $ asUser <$> dbUsers
 
 postUserHandler
-  :: UserEdit
+  :: GrantedClaims
+  -> UserEdit
   -> App ()
-postUserHandler userToCreate = do
+postUserHandler claims userToCreate = do
   $logInfo $ "Creating a new user for identifier "
     <> tshow (ueIdent userToCreate)
 
@@ -44,8 +48,10 @@ postUserHandler userToCreate = do
       in throwError
          $ err400 { errReasonPhrase = tunpack message }
 
-getSessionsHandler :: App [Session]
-getSessionsHandler = do
+getSessionsHandler
+  :: GrantedClaims
+  -> App [Session]
+getSessionsHandler claims = do
   $logDebug $ "Loading sessions"
   dbSession :: [Entity DbSession] <- runDb
     $ select
@@ -53,9 +59,10 @@ getSessionsHandler = do
   pure $ asSession <$> dbSession
 
 postSessionHandler
-  :: SessionEdit
+  :: GrantedClaims
+  -> SessionEdit
   -> App ()
-postSessionHandler sessionToCreate = do
+postSessionHandler claims sessionToCreate = do
   $logInfo $ "Creating a new session for identifier "
     <> tshow (seTitle sessionToCreate)
 
@@ -77,9 +84,9 @@ postSessionHandler sessionToCreate = do
 
 grantClaimsHandler
   :: GrantedClaims
-  -> App GrantedClaims
+  -> App Text
 grantClaimsHandler =
-  pure
+  pure . fromUtf8 . unJwt . jwt
 
 {- Mapping -}
 asUser

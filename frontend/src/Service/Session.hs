@@ -5,6 +5,9 @@ import Import
 import Control.Lens
 import JavaScript.JQuery
 
+
+data Session = Session { blah :: Text }
+
 getAvailableSessions
   :: (MonadReader FrontendConfig m, MonadIO m, MonadLogger m, Monad m)
   => m [Session]

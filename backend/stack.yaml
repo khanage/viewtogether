@@ -15,7 +15,7 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
-resolver: lts-6.26
+resolver: lts-7.12
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -38,10 +38,15 @@ resolver: lts-6.26
 packages:
 - '.'
 - '../shared'
+
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
-extra-deps: []
-
+extra-deps: 
+- esqueleto-2.4.3
+- persistent-2.2.4.1
+- persistent-sqlite-2.2.1
+- persistent-template-2.1.8.1
+- Cabal-1.24.2.0
 # Override default flag values for local packages and extra-deps
 flags: {}
 

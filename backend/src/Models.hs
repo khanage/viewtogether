@@ -2,11 +2,14 @@ module Models where
 
 import           BaseImports
 import           Config
-import           Data.Aeson             (FromJSON, ToJSON)
+import           Data.Aeson             
 import           Data.Aeson.TH
 import           Database.Persist.Sql   (PersistField (..),
                                          PersistFieldSql (..))
 import           Database.Persist.Types (SqlType (..))
+import           Jose.Jwa
+import           Jose.Jws
+import           Jose.Jwt
 
 newtype Password = Password { unPassword :: Text }
   deriving (IsString, Show, Generic)
@@ -93,8 +96,15 @@ instance ToSchema SessionEdit
 $(deriveJSON defaultOptions ''SessionEdit)
 
 data GrantedClaims = GrantedClaims
-  { jwt :: Text
-  } deriving (Eq, Show, Generic)
+  { jwt :: Jwt
+  } deriving (Eq, Show) -- No generic as all the things should be handrolled
 
-$(deriveJSON defaultOptions ''GrantedClaims)
+instance ToJSON GrantedClaims where
+  toJSON (GrantedClaims (Jwt payload)) =
+    object ["claims" .= fromUtf8 payload]
+
+  toEncoding (GrantedClaims (Jwt payload)) =
+    pairs ("claims" .= fromUtf8 payload)
+
+-- $(deriveJSON defaultOptions ''GrantedClaims)
 

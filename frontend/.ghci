@@ -1,2 +1,3 @@
-:set -XOverloadedStrings
-:set prompt "\ESC[34mλ> \ESC[m"
+:set prompt "\ESC[1;34m%s\n\ESC[0;34mλ> \ESC[m"
+:set -fwarn-incomplete-patterns
+:set -fdefer-type-errors

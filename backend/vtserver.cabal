@@ -1,4 +1,4 @@
-name:                backend-servant
+name:                vtserver
 version:             0.1.0.0
 synopsis:            View together is a web app to watch shows on netflix et al with friends
 description:         Please see README.md
@@ -21,6 +21,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     EntryPoint
   other-modules:       ViewTogetherApp
+                     , SwaggerHelp
 
                      , BaseImports
                      , Imports
@@ -42,6 +43,8 @@ library
                      , GeneralizedNewtypeDeriving
                      , TypeFamilies
                      , NoImplicitPrelude
+                     , TypeOperators
+                     , DataKinds
                      , RecordWildCards
                      , RankNTypes
                      , TemplateHaskell
@@ -84,7 +87,7 @@ executable backend
                      , TemplateHaskell
                      , NoImplicitPrelude
   build-depends:       base
-                     , backend-servant
+                     , vtserver
                      , monad-logger
                      , classy-prelude
                      , fast-logger

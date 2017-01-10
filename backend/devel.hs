@@ -1,6 +1,5 @@
 {-# LANGUAGE PackageImports #-}
-import "backend" Application (develMain)
-import Prelude (IO)
+import "vtserver" EntryPoint (develMain)
 
 main :: IO ()
 main = develMain

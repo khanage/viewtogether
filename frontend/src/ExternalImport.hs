@@ -8,5 +8,4 @@ module ExternalImport
 -- i.e. to avoid circular references
 
 import ClassyPrelude.Conduit as Import
-import Models.Session as Import
 import Control.Monad.Reader.Class as Import

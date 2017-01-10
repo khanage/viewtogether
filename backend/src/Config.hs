@@ -7,6 +7,7 @@ import           Data.Pool                (Pool)
 import           Database.Persist.Sql     (SqlBackend)
 import           Network.Wai.Handler.Warp (Port)
 import           Servant.Server           (ServantErr)
+import Servant (ServerT)
 
 newtype App a = App
   { unApp :: ReaderT AppConfig (LoggingT (ExceptT ServantErr IO)) a
@@ -20,6 +21,7 @@ newtype App a = App
     , MonadReader AppConfig
     , MonadError ServantErr
     )
+type AppServer a = ServerT a App
 
 data AppConfig = AppConfig
   { acPool         :: Pool SqlBackend

@@ -3,6 +3,6 @@ module Config.Strings where
 import SharedImport
 
 someMessage
-  :: String
+  :: Text
 someMessage =
   "All sorted"

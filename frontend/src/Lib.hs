@@ -37,6 +37,8 @@ data Counter = Counter { dummy :: String, count :: Int } deriving (Generic)
 instance ToJSVal Counter
 instance FromJSVal Counter
 
+test = _
+
 R.makeClass "counter"
   [| R.statefulSpec (pure $ Counter "" 0) $ do
       clicker <- R.eventHandler . const $ R.getState >>= R.setState . Counter "" . (+1) . count
@@ -55,7 +57,7 @@ R.makeClass "login"
   [| R.statefulSpec (pure $ Counter "" 0) $ do
       pure . pure $
         DOM.div_ []
-        [ DOM.div_ [R.Prop "id" (packText "1q23")] ["Yeah, nah, login mate"]
+        [ DOM.div_ [R.Prop "id" (packText "1q23")] ["Yeah, nah, login mate!"]
         ]
   |]
 login :: R.ReactClass R.OnlyAttributes

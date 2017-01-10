@@ -11,8 +11,11 @@ setup-info:
 
 packages:
 - '.'
-- '../shared'
-- '../ghcjs-jquery'
-- '../ghcjs-react'
+- location: '../shared'
+  extra-dep: true
+- location: '../ghcjs-jquery'
+  extra-dep: true
+- location: '../ghcjs-react'
+  extra-dep: true
 
 #extra-deps:
